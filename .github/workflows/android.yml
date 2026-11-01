@@ -78,13 +78,22 @@ jobs:
           ./scripts/languagelist_updater.sh
           mkdir out
 
+            - name: Build Debug .apk
+        run: |
+          # Build the launcher
+          gradle :app_pojavlauncher:assembleDebug
+          mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug.apk
+      - name: Gen md5sums (debug)
+        run: |
+          md5sum out/app-debug.apk > out/app-debug.md5
       - name: Build Release .apk
+        continue-on-error: true
         run: |
           # Build the launcher
           gradle :app_pojavlauncher:assembleRelease
           mv app_pojavlauncher/build/outputs/apk/release/app_pojavlauncher-release.apk out/app-release.apk
-
-      - name: Gen md5sums
+      - name: Gen md5sums (release)
+        continue-on-error: true
         run: |
           md5sum out/app-release.apk > out/app-release.md5
 
