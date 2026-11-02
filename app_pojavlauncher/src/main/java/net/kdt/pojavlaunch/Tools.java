@@ -850,8 +850,10 @@ public final class Tools {
 
         if(profile.isDemo()) mcArguments += " --demo";
 
+        // XLAX: oyun her başlatıldığında otomatik olarak Xlax sunucusuna bağlan
+        mcArguments += " --server xlax.aternos.me --port 56956";
+
         return JSONUtils.insertJSONValueList(splitAndFilterEmpty(mcArguments), varArgMap);
-    }
 
     public static String fromStringArray(String[] strArr) {
         StringBuilder builder = new StringBuilder();
